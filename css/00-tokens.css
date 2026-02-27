@@ -1,0 +1,18 @@
+/* FILE: css/00-tokens.css */
+:root {
+  /* Theme tokens */
+  --bg:      #050a0f;
+  --surface: #0a1520;
+  --surface2:#0f1e2e;
+  --accent:  #00c8ff;
+  --accent2: #ff3c3c;
+  --gold:    #f0c040;
+  --text:    #e8f0f8;
+  --muted:   #6b8aaa;
+  --border:  rgba(0,200,255,0.15);
+  --glow:    0 0 30px rgba(0,200,255,0.25);
+
+  /* Layout */
+  --container-pad: 5%;
+  --header-h: 68px;
+}

@@ -1,0 +1,95 @@
+/* FILE: css/99-responsive.css */
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 900px) {
+  /* Show hamburger */
+  .hamburger { display: flex; }
+
+  /* Drawer nav */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(300px, 85vw);
+    height: 100vh;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    background: #030810;
+    border-right: 2px solid var(--accent);
+    overflow-y: auto;
+    transform: translateX(-105%);
+    transition: transform 0.3s ease;
+    /* Drawer must be ABOVE overlay */
+    z-index: 12001;
+    visibility: hidden;
+    box-shadow: 4px 0 40px rgba(0,0,0,0.9);
+  }
+
+  /* When open */
+  body.nav-open .site-nav {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    height: var(--header-h);
+    min-height: var(--header-h);
+    flex-shrink: 0;
+    background: #060d16;
+    border-bottom: 1px solid rgba(0,200,255,0.2);
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 16px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #a0c8e0;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(0,200,255,0.08);
+    border-radius: 0;
+    margin: 0;
+  }
+  .site-nav a:last-child { border-bottom: none; }
+
+  /* CTA inside drawer */
+  .site-nav .nav-cta {
+    margin: 20px 18px 0 !important;
+    padding: 14px 18px !important;
+    border-radius: 6px !important;
+    text-align: center;
+    display: block;
+  }
+
+  /* Overlay appears when open */
+  body.nav-open .nav-overlay { display: block; }
+
+  /* Layout fixes */
+  .hero-visual { display: none; }
+  .pricing-card.featured { transform: none; }
+  .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
+
+  .outsource-grid,
+  .it-grid,
+  .contact-grid { grid-template-columns: 1fr; }
+
+  .it-intro { position: static; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}

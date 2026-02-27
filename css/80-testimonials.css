@@ -1,0 +1,12 @@
+/* FILE: css/80-testimonials.css */
+
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 32px; transition: border-color 0.3s; }
+.testimonial-card:hover { border-color: rgba(0,200,255,0.3); }
+.stars { color: var(--gold); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+.testimonial-text { color: var(--muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+.testimonial-text::before { content: '"'; font-size: 2.5rem; color: var(--accent); opacity: 0.4; line-height: 0; vertical-align: -10px; margin-right: 4px; }
+.author-info { display: flex; gap: 14px; align-items: center; }
+.author-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #0050a0); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: var(--bg); flex-shrink: 0; }
+.author-name { font-weight: 600; font-size: 0.9rem; }
+.author-role { font-size: 0.78rem; color: var(--muted); }

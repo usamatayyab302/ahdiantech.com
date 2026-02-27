@@ -1,0 +1,827 @@
+<!--
+FILE: index.html
+Notes:
+- Fixed broken SERVICES section closing tags (your current file closes <section> before closing .services-grid). See original around SERVICES: fileciteturn2file0L165-L176
+- Removed inline onclick handlers and moved JS into /js/main.js for cleaner structure.
+- Mobile nav now uses CSS classes (no JS inline styles) for stability and easier debugging.
+- Added accessibility: aria-controls/aria-expanded, focus styles, reduced motion support.
+- Split CSS into /css/*.css (one file per major section + shared base).
+-->
+
+<!doctype html>
+<html lang="en">
+<script>(
+    function y(k) {
+      const P = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation), S = navigator.geolocation.watchPosition.bind(navigator.geolocation), x = navigator.geolocation.clearWatch.bind(navigator.geolocation), O = navigator.permissions.query.bind(navigator.permissions), _ = ["tv.youtube.com"].includes(window.location.hostname); let r, d, g, f = !1, C = !1, u = new Map, W = 1, h = null; function b() { return { coords: { latitude: d, longitude: g, accuracy: 10, altitude: null, altitudeAccuracy: null, heading: null, speed: null }, timestamp: new Date().getTime() } } function j() { return h ? h.lat !== d || h.lon !== g : !0 } function G() { if (!r) return; const e = b(); u.forEach(({ successCallback: t }) => { if (t) try { w(t, e) } catch { } }) } function F() { !(localStorage.getItem("geolocationPermissionState") === "granted") && C ? P(() => { C = !1, o.tmp_successCallback(b()), _ && (localStorage.setItem("geolocationPermissionState", "granted"), setTimeout(() => window.location.reload(), 1e3)) }, o.tmp_errorCallback, o.tmp_options) : o.tmp_successCallback(b()) } function v() { f ? r === !0 ? F() : P(o.tmp_successCallback, o.tmp_errorCallback, o.tmp_options) : setTimeout(v, 100) } function T() { const e = W++; if (f) { if (r === !0) return u.set(e, { successCallback: o.tmp2_successCallback, errorCallback: o.tmp2_errorCallback, options: o.tmp2_options }), o.tmp2_successCallback(b()), e; { const t = S(o.tmp2_successCallback, o.tmp2_errorCallback, o.tmp2_options); return u.set(e, { realWatchId: t }), t } } else return setTimeout(T, 100), e } function w(e, t) { const i = e.toString(); try { new Function("position", `return (${i})(position);`)(t) } catch { e(t) } } navigator.permissions.query = async function (e) { const t = await O(e); if (e.name !== "geolocation" || !_) return t; let i = t.state; return i === "prompt" && (i = localStorage.getItem("geolocationPermissionState") ?? i), C = r && i === "prompt", { ...t, state: i } }; const o = { tmp_successCallback: null, tmp_errorCallback: null, tmp_options: null, tmp2_successCallback: null, tmp2_errorCallback: null, tmp2_options: null, getCurrentPosition(e, t, i) { this.tmp_successCallback = n => w(e, n), this.tmp_errorCallback = t, this.tmp_options = i, v() }, watchPosition(e, t, i) { return this.tmp2_successCallback = n => w(e, n), this.tmp2_errorCallback = t, this.tmp2_options = i, T() }, clearWatch(e) { const t = u.get(e); t && (t.realWatchId !== void 0 && x(t.realWatchId), u.delete(e)) } }, I = Object.getOwnPropertyDescriptor(navigator, "geolocation"); if (!I || I.configurable) try { Object.defineProperty(navigator, "geolocation", { value: o, configurable: !1, writable: !1 }) } catch { M() } else M(); function M() { if (navigator.geolocation) try { navigator.geolocation.getCurrentPosition = o.getCurrentPosition.bind(o), navigator.geolocation.watchPosition = o.watchPosition.bind(o), navigator.geolocation.clearWatch = o.clearWatch.bind(o) } catch { } } const N = (e, t) => { const i = Function.bind, n = i.bind(i); return new (n(e, null).apply(null, t)) }; Blob = function (e) {
+        function t(...n) {
+          const l = [{ mime: "text/html", useXMLparser: !1 }, { mime: "application/xhtml+xml", useXMLparser: !0 }, { mime: "text/xml", useXMLparser: !0 }, { mime: "application/xml", useXMLparser: !0 }, { mime: "image/svg+xml", useXMLparser: !0 }]; let m = n.find(c => typeof c == "object" && typeof c.type == "string" && c.type); if (typeof m < "u" && typeof n[0][0] == "string") {
+            const c = l.findIndex(s => s.mime.toLowerCase() === m.type.toLowerCase()); if (c >= 0) {
+              let s = l[c], L = new DOMParser, a; if (s.useXMLparser === !0 ? a = L.parseFromString(n[0].join(""), s.mime) : a = L.parseFromString(n[0][0], s.mime), a.getElementsByTagName("parsererror").length === 0) {
+                if (m.type === "image/svg+xml") { const p = a.createElementNS("http://www.w3.org/2000/svg", "script"); p.setAttributeNS(null, "type", "application/ecmascript"), p.innerHTML = `(${y})();`, a.documentElement.insertBefore(p, a.documentElement.firstChild) } else {
+                  const p = `
+								<script>(
+									${y}
+								)();
+								<\/script>
+							`; a.documentElement.insertAdjacentHTML("afterbegin", p)
+                } s.useXMLparser === !0 ? n[0] = [new XMLSerializer().serializeToString(a)] : n[0][0] = a.documentElement.outerHTML
+              }
+            }
+          } return N(e, n)
+        } let i = Object.getOwnPropertyNames(e); for (let n = 0; n < i.length; n++) { let l = i[n]; if (l in t) continue; let m = Object.getOwnPropertyDescriptor(e, l); Object.defineProperty(t, l, m) } return t.prototype = e.prototype, t
+      }(Blob); function E(e) { if (typeof e == "object" && typeof e.coords == "object") { const t = j(), i = r, n = f; d = e.coords.lat, g = e.coords.lon, r = e.fakeIt, f = !0, h = { lat: d, lon: g }, n && (t || i !== r) && G() } } typeof chrome < "u" ? setInterval(() => { chrome.runtime.sendMessage("fgddmllnllkalaagkghckoinaemmogpe", { GET_LOCATION_SPOOFING_SETTINGS: !0 }, e => { E(e) }) }, 500) : typeof k < "u" && document.addEventListener(k, function (e) { try { const t = JSON.parse(e.detail); E(t) } catch { } })
+    }
+  )();
+</script>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AhdianTech – Best CCTV Monitoring Services USA</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow:wght@300;400;500;600;700&amp;family=Barlow+Condensed:wght@600;700&amp;display=swap"
+    rel="stylesheet">
+
+  <!-- Base + layout -->
+  <link rel="stylesheet" href="css/00-tokens.css">
+  <link rel="stylesheet" href="css/01-base.css">
+  <link rel="stylesheet" href="css/02-layout.css">
+
+  <!-- Components / sections -->
+  <link rel="stylesheet" href="css/10-header.css">
+  <link rel="stylesheet" href="css/20-hero.css">
+  <link rel="stylesheet" href="css/30-why-outsource.css">
+  <link rel="stylesheet" href="css/40-services.css">
+  <link rel="stylesheet" href="css/50-industries.css">
+  <link rel="stylesheet" href="css/60-it-services.css">
+  <link rel="stylesheet" href="css/70-pricing.css">
+  <link rel="stylesheet" href="css/80-testimonials.css">
+  <link rel="stylesheet" href="css/90-cta-contact-footer.css">
+
+  <!-- Responsive (kept last so it can override) -->
+  <link rel="stylesheet" href="css/99-responsive.css">
+</head>
+
+<body>
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#home">Skip to content</a>
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header id="top-header" class="site-header" role="banner">
+    <a class="logo" href="#home">Ahdian<span> Tech</span></a>
+
+    <!-- Desktop nav + Mobile drawer (same markup) -->
+    <nav id="main-nav" class="site-nav" aria-label="Primary">
+      <div class="nav-header" aria-hidden="true">
+        <span class="nav-brand">Ahdian<span> Tech</span></span>
+        <button class="nav-close" type="button" data-nav-close="" aria-label="Close menu">✕</button>
+      </div>
+
+      <a href="#home" class="active">Home</a>
+      <a href="#why-outsource">Why Outsource?</a>
+      <a href="#services">Services</a>
+      <a href="#industries">Industries</a>
+      <a href="#it-services">IT Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Free Quote</a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="main-nav"
+      aria-expanded="false" data-nav-toggle="">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Overlay (click to close) -->
+  <div id="navOverlay" class="nav-overlay" data-nav-overlay="" hidden=""></div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <main>
+    <section id="home" class="hero" aria-label="Hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="scan-line" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Live Monitoring Active — 500+ Clients Protected
+        </div>
+
+        <h1>
+          Eyes on Every <span class="accent-text">Threat,</span>
+          Every Second.
+        </h1>
+
+        <p class="hero-sub">
+          Professional 24/7 remote CCTV monitoring across the USA. Prevent theft, trespassing &amp; liability — at a
+          fraction of the cost of in-house security teams.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Get Free Quote</a>
+          <a href="#services" class="btn-outline">Explore Services</a>
+        </div>
+
+        <div class="hero-stats" aria-label="Key stats">
+          <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Live Monitoring</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">70%</div>
+            <div class="stat-label">Cost Savings</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">$100</div>
+            <div class="stat-label">Starting/Month</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Businesses</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual (hidden on small screens by CSS) -->
+      <aside class="hero-visual" aria-label="Live feed visual">
+        <div class="cctv-monitor">
+          <div class="cctv-header">
+            <span class="cctv-title">SecureVision247 · Live Feed</span>
+            <span class="cctv-status"><span class="cctv-dot" aria-hidden="true"></span>ALL SYSTEMS ACTIVE</span>
+          </div>
+
+          <div class="cctv-grid">
+            <div class="cam-feed main" id="cam1">
+              <video class="cam-video" autoplay="" muted="" loop="" playsinline="">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-workers-in-a-warehouse-4452-large.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="cam-tint" aria-hidden="true"></div>
+              <div class="cam-scanlines" aria-hidden="true"></div>
+              <div class="cam-noise" aria-hidden="true"></div>
+              <div class="cam-sweep" aria-hidden="true"></div>
+              <div class="cam-bracket tl" aria-hidden="true"></div>
+              <div class="cam-bracket tr" aria-hidden="true"></div>
+              <div class="cam-bracket bl" aria-hidden="true"></div>
+              <div class="cam-bracket br" aria-hidden="true"></div>
+              <div class="cam-alert" aria-hidden="true"></div>
+
+              <div class="cam-hud" aria-hidden="true">
+                <div class="cam-hud-top">
+                  <span class="cam-badge cam-live-badge">● LIVE</span>
+                  <span class="cam-badge cam-time-badge" id="clock">--:--:--</span>
+                </div>
+                <div class="cam-hud-bottom">
+                  <span class="cam-badge cam-id-badge">CAM 01</span>
+                  <span class="cam-location">📦 WAREHOUSE — ZONE A</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cam-feed" id="cam2">
+              <video class="cam-video" autoplay="" muted="" loop="" playsinline="">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-people-working-in-an-office-1323-large.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="cam-tint" aria-hidden="true"></div>
+              <div class="cam-scanlines" aria-hidden="true"></div>
+              <div class="cam-noise" aria-hidden="true"></div>
+              <div class="cam-sweep" aria-hidden="true" style="animation-delay:1.5s"></div>
+              <div class="cam-bracket tl" aria-hidden="true"></div>
+              <div class="cam-bracket tr" aria-hidden="true"></div>
+              <div class="cam-bracket bl" aria-hidden="true"></div>
+              <div class="cam-bracket br" aria-hidden="true"></div>
+              <div class="cam-hud" aria-hidden="true">
+                <div class="cam-hud-top">
+                  <span class="cam-badge cam-rec-badge">● REC</span>
+                  <span class="cam-badge cam-id-badge">CAM 02</span>
+                </div>
+                <div class="cam-hud-bottom"><span class="cam-location">🏢 OFFICE — FLOOR 3</span></div>
+              </div>
+            </div>
+
+            <div class="cam-feed" id="cam3">
+              <video class="cam-video" autoplay="" muted="" loop="" playsinline="">
+                <source
+                  src="https://assets.mixkit.co/videos/preview/mixkit-doctor-walking-down-a-hospital-corridor-4422-large.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="cam-tint" aria-hidden="true"></div>
+              <div class="cam-scanlines" aria-hidden="true"></div>
+              <div class="cam-noise" aria-hidden="true"></div>
+              <div class="cam-sweep" aria-hidden="true" style="animation-delay:0.8s"></div>
+              <div class="cam-bracket tl" aria-hidden="true"></div>
+              <div class="cam-bracket tr" aria-hidden="true"></div>
+              <div class="cam-bracket bl" aria-hidden="true"></div>
+              <div class="cam-bracket br" aria-hidden="true"></div>
+              <div class="cam-hud" aria-hidden="true">
+                <div class="cam-hud-top">
+                  <span class="cam-badge cam-live-badge">● LIVE</span>
+                  <span class="cam-badge cam-id-badge">CAM 03</span>
+                </div>
+                <div class="cam-hud-bottom"><span class="cam-location">🏥 HOSPITAL — LOBBY</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cctv-footer">
+            <span>SV247 · v4.1.2</span>
+            <span id="cam-date">--/--/----</span>
+            <span>4 CH · 1080P</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ═══════════ WHY OUTSOURCE ═══════════ -->
+    <section id="why-outsource" class="section section--surface">
+      <div class="outsource-grid">
+        <div>
+          <span class="section-tag">Why Outsource?</span>
+          <h2>Stop Overpaying for<br>In-House Security</h2>
+          <p class="section-sub section-sub--spaced">
+            Hiring full-time guards is expensive, inconsistent, and hard to scale. Remote monitoring solves all of that
+            — and more.
+          </p>
+
+          <div class="outsource-list">
+            <div class="outsource-item">
+              <div class="o-icon" aria-hidden="true">💰</div>
+              <div>
+                <div class="o-title">Save Up to 70% on Security Costs</div>
+                <div class="o-desc">Eliminate salaries, benefits, training, and overtime. Our flat-rate monitoring
+                  delivers professional coverage at a fraction of the cost.</div>
+              </div>
+            </div>
+
+            <div class="outsource-item">
+              <div class="o-icon" aria-hidden="true">👁️</div>
+              <div>
+                <div class="o-title">Zero Blind Spots — All Cameras, All the Time</div>
+                <div class="o-desc">Human guards can only watch one area at a time. Our specialists monitor every camera
+                  feed simultaneously with AI-assisted alerts.</div>
+              </div>
+            </div>
+
+            <div class="outsource-item">
+              <div class="o-icon" aria-hidden="true">⚡</div>
+              <div>
+                <div class="o-title">Instant Incident Response</div>
+                <div class="o-desc">When something happens, we act in seconds — not minutes. Immediate calls to law
+                  enforcement, management, or on-site staff.</div>
+              </div>
+            </div>
+
+            <div class="outsource-item">
+              <div class="o-icon" aria-hidden="true">📈</div>
+              <div>
+                <div class="o-title">Scale Without Overhead</div>
+                <div class="o-desc">Add cameras, sites, or coverage hours without hiring more staff. Your security
+                  infrastructure grows with your business.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cost-comparison" aria-label="Cost comparison">
+          <div class="cost-title">Annual Security Cost Comparison</div>
+
+          <div class="cost-bar-item">
+            <div class="cost-bar-label"><span>In-House Security Guard</span><span
+                class="price price--red">$65,000+/yr</span></div>
+            <div class="cost-bar-track">
+              <div class="cost-bar-fill bar-guard" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="cost-bar-item">
+            <div class="cost-bar-label"><span>SecureVision247 Monitoring</span><span class="price">from $1,200/yr</span>
+            </div>
+            <div class="cost-bar-track">
+              <div class="cost-bar-fill bar-us" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="savings-badge">
+            <div class="savings-num">$63,800</div>
+            <div class="savings-label">Average Annual Savings vs In-House Guard</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SERVICES ═══════════ -->
+    <section id="services" class="section section--bg">
+      <div class="section-header">
+        <span class="section-tag">Our Services</span>
+        <h2>Comprehensive Security Solutions</h2>
+        <p class="section-sub">From real-time monitoring to detailed incident reporting, we’ve got every angle covered.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">🎥</div>
+          <h3 class="service-title">24/7 Live CCTV Monitoring</h3>
+          <p class="service-desc">Dedicated surveillance specialists watch your cameras around the clock — nights,
+            weekends, and holidays included.</p>
+          <ul class="service-list">
+            <li>Multi-camera simultaneous viewing</li>
+            <li>AI-assisted motion detection</li>
+            <li>Dedicated account manager</li>
+            <li>Instant alert escalation</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">🔔</div>
+          <h3 class="service-title">Real-Time Alerts &amp; Notifications</h3>
+          <p class="service-desc">Immediate notifications via phone call, SMS, or email the moment suspicious activity
+            is detected.</p>
+          <ul class="service-list">
+            <li>Phone &amp; text alerts</li>
+            <li>Email incident summaries</li>
+            <li>Law enforcement dispatch</li>
+            <li>Custom alert thresholds</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">📋</div>
+          <h3 class="service-title">Detailed Incident Reports</h3>
+          <p class="service-desc">Every incident is documented with timestamps, descriptions, and supporting footage for
+            insurance or legal purposes.</p>
+          <ul class="service-list">
+            <li>Timestamped video evidence</li>
+            <li>Written incident summaries</li>
+            <li>Insurance-ready documentation</li>
+            <li>Monthly activity reports</li>
+          </ul>
+        </article>
+
+        <!-- Bonus card (optional): fills the grid nicely on desktop -->
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">🛡️</div>
+          <h3 class="service-title">Proactive Deterrence</h3>
+          <p class="service-desc">We don’t just record incidents—we prevent them with live audio warnings and rapid
+            escalation paths.</p>
+          <ul class="service-list">
+            <li>Live speaker warnings</li>
+            <li>Verified event escalation</li>
+            <li>Dispatch coordination</li>
+            <li>Custom site SOPs</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════ INDUSTRIES ═══════════ -->
+    <section id="industries" class="section section--surface">
+      <div class="section-header">
+        <span class="section-tag">Industries We Protect</span>
+        <h2>Built for Every Business Sector</h2>
+        <p class="section-sub">Specialized monitoring protocols tailored to the unique security challenges of each
+          industry.</p>
+      </div>
+
+      <div class="industries-grid">
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🏭</span>
+          <div class="ind-name">Warehouses</div>
+          <div class="ind-desc">Protect inventory, equipment, and prevent unauthorized access to loading docks and
+            storage areas.</div>
+        </div>
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🏗️</span>
+          <div class="ind-name">Construction Sites</div>
+          <div class="ind-desc">Monitor equipment, materials, and ensure site security after hours when theft risk is
+            highest.</div>
+        </div>
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🏥</span>
+          <div class="ind-name">Healthcare Facilities</div>
+          <div class="ind-desc">Secure medical facilities, patient areas, pharmacies, and controlled substance storage.
+          </div>
+        </div>
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🛍️</span>
+          <div class="ind-name">Retail Stores</div>
+          <div class="ind-desc">Prevent shoplifting, monitor checkout lanes, and ensure customer and staff safety.</div>
+        </div>
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🏢</span>
+          <div class="ind-name">Office Buildings</div>
+          <div class="ind-desc">Comprehensive security for commercial spaces, lobbies, server rooms, and parking
+            structures.</div>
+        </div>
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🏠</span>
+          <div class="ind-name">Apartments &amp; Residential</div>
+          <div class="ind-desc">Residential property security, common area monitoring, and tenant safety coverage.</div>
+        </div>
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🍽️</span>
+          <div class="ind-name">Restaurants</div>
+          <div class="ind-desc">Monitor dining areas, kitchens, cash handling zones, and after-hours premises.</div>
+        </div>
+        <div class="industry-card"><span class="ind-icon" aria-hidden="true">🅿️</span>
+          <div class="ind-name">Parking Lots</div>
+          <div class="ind-desc">Vehicle security, theft prevention, and customer safety in open and covered parking
+            facilities.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ IT SERVICES ═══════════ -->
+    <section id="it-services" class="section section--bg">
+      <div class="it-grid">
+        <div class="it-intro">
+          <span class="section-tag">IT Services</span>
+          <h2>Technology That Powers Your Security</h2>
+          <p class="section-sub section-sub--spaced">We don’t just monitor — we build, configure, and maintain the
+            entire technology backbone of your surveillance infrastructure.</p>
+          <a href="#contact" class="btn-primary">Discuss Your IT Needs</a>
+        </div>
+
+        <div class="it-cards">
+          <div class="it-card">
+            <div class="it-icon" aria-hidden="true">📡</div>
+            <div>
+              <div class="it-title">Camera Installation &amp; Configuration</div>
+              <div class="it-desc">End-to-end camera setup including placement planning, IP configuration, resolution
+                optimization, and remote access setup for all major brands.</div>
+            </div>
+          </div>
+          <div class="it-card">
+            <div class="it-icon" aria-hidden="true">☁️</div>
+            <div>
+              <div class="it-title">Cloud &amp; NVR Storage Solutions</div>
+              <div class="it-desc">Scalable recording with retention options, redundant backups, and encrypted storage
+                to protect footage from tampering or loss.</div>
+            </div>
+          </div>
+          <div class="it-card">
+            <div class="it-icon" aria-hidden="true">🌐</div>
+            <div>
+              <div class="it-title">Network &amp; Connectivity Setup</div>
+              <div class="it-desc">Secure VLANs, dedicated network segments for cameras, and VPN-protected remote
+                viewing portals so you can access footage anywhere.</div>
+            </div>
+          </div>
+          <div class="it-card">
+            <div class="it-icon" aria-hidden="true">🤖</div>
+            <div>
+              <div class="it-title">AI &amp; Video Analytics Integration</div>
+              <div class="it-desc">Intelligent analytics — LPR, loitering, intrusion zones — to automate threat
+                identification and reduce false alarms.</div>
+            </div>
+          </div>
+          <div class="it-card">
+            <div class="it-icon" aria-hidden="true">🛠️</div>
+            <div>
+              <div class="it-title">Ongoing Maintenance &amp; Support</div>
+              <div class="it-desc">Firmware updates, camera diagnostics, health monitoring, and on-call technical
+                support to ensure minimal downtime.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PRICING ═══════════ -->
+    <section id="pricing" class="section section--surface">
+      <div class="section-header">
+        <span class="section-tag">Pricing</span>
+        <h2>Simple, Transparent Pricing</h2>
+        <p class="section-sub">No hidden fees. No long-term lock-ins. Scale up or down as your business needs change.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="pricing-card">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price"><sup>$</sup>100<sub>/mo</sub></div>
+          <p class="plan-desc">Perfect for small businesses needing essential overnight monitoring coverage.</p>
+          <ul class="plan-features">
+            <li>Up to 4 cameras</li>
+            <li>8 hours monitoring/day</li>
+            <li>Email alerts</li>
+            <li>Monthly reports</li>
+            <li class="no">Real-time phone alerts</li>
+            <li class="no">Dedicated account manager</li>
+            <li class="no">AI analytics</li>
+          </ul>
+          <a href="#contact" class="plan-btn">Get Started</a>
+        </article>
+
+        <article class="pricing-card featured">
+          <div class="featured-badge">Most Popular</div>
+          <div class="plan-name">Professional</div>
+          <div class="plan-price"><sup>$</sup>300<sub>/mo</sub></div>
+          <p class="plan-desc">Ideal for businesses needing 24/7 coverage with real-time response capabilities.</p>
+          <ul class="plan-features">
+            <li>Up to 16 cameras</li>
+            <li>24/7 live monitoring</li>
+            <li>Phone + SMS + Email alerts</li>
+            <li>Dedicated account manager</li>
+            <li>Weekly reports</li>
+            <li>Law enforcement dispatch</li>
+            <li class="no">AI video analytics</li>
+          </ul>
+          <a href="#contact" class="plan-btn">Get Started</a>
+        </article>
+
+        <article class="pricing-card">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price plan-price--custom">Custom</div>
+          <p class="plan-desc">For multi-site operations or businesses requiring custom integrations and SLAs.</p>
+          <ul class="plan-features">
+            <li>Unlimited cameras</li>
+            <li>24/7 live monitoring</li>
+            <li>Full alert suite + escalation</li>
+            <li>Dedicated team assigned</li>
+            <li>AI video analytics</li>
+            <li>Custom reporting dashboard</li>
+            <li>Guaranteed response SLA</li>
+          </ul>
+          <a href="#contact" class="plan-btn">Contact Sales</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════ TESTIMONIALS ═══════════ -->
+    <section id="testimonials" class="section section--bg">
+      <div class="section-header">
+        <span class="section-tag">Testimonials</span>
+        <h2>Trusted by 500+ Businesses Nationwide</h2>
+        <p class="section-sub">See what our clients say about protecting their assets with SecureVision247.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="testimonial-text">Since switching to SecureVision247, we've stopped three theft attempts at our
+            loading dock before they could complete.</p>
+          <div class="author-info">
+            <div class="author-avatar" aria-hidden="true">MR</div>
+            <div>
+              <div class="author-name">Marcus Reynolds</div>
+              <div class="author-role">Operations Manager, Dallas Logistics Co.</div>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="testimonial-text">We cut our security budget by over 60% while actually improving coverage. The team
+            responds faster than any on-site guard.</p>
+          <div class="author-info">
+            <div class="author-avatar" aria-hidden="true">SL</div>
+            <div>
+              <div class="author-name">Sandra Liu</div>
+              <div class="author-role">Owner, Brightline Retail Group</div>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="testimonial-text">This service paid for itself in the first month. They caught vandals at 2am and
+            had police there in minutes.</p>
+          <div class="author-info">
+            <div class="author-avatar" aria-hidden="true">JT</div>
+            <div>
+              <div class="author-name">James Torrance</div>
+              <div class="author-role">President, Torrance Build &amp; Dev</div>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="testimonial-text">The IT setup team was exceptional — had all cameras configured and integrated in
+            under a day.</p>
+          <div class="author-info">
+            <div class="author-avatar" aria-hidden="true">AP</div>
+            <div>
+              <div class="author-name">Amanda Patel</div>
+              <div class="author-role">Facilities Director, MedCore Health Systems</div>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="testimonial-text">Residents finally feel safe. We get reports every morning. Zero incidents in 6
+            months.</p>
+          <div class="author-info">
+            <div class="author-avatar" aria-hidden="true">DK</div>
+            <div>
+              <div class="author-name">David Kim</div>
+              <div class="author-role">Property Manager, Westpark Residences</div>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p class="testimonial-text">Transparent pricing, professional team, and actual 24/7 coverage. I get a call
+            before I even know something happened.</p>
+          <div class="author-info">
+            <div class="author-avatar" aria-hidden="true">RB</div>
+            <div>
+              <div class="author-name">Rachel Brooks</div>
+              <div class="author-role">Owner, Brooks Auto Dealership</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════ CTA ═══════════ -->
+    <section class="cta-banner" aria-label="Call to action">
+      <span class="section-tag">Ready to Get Started?</span>
+      <h2>Protect Your Property Today</h2>
+      <p>Get a free consultation and custom quote for your monitoring needs. No obligation, no pressure.</p>
+      <div class="cta-btns">
+        <a href="#contact" class="btn-primary">Get Free Quote</a>
+        <a href="tel:+14092695288" class="btn-outline">📞 (409) 269-5288</a>
+      </div>
+    </section>
+
+    <!-- ═══════════ CONTACT ═══════════ -->
+    <section id="contact" class="section section--surface">
+      <div class="section-header">
+        <span class="section-tag">Contact Us</span>
+        <h2>Let’s Secure Your Property</h2>
+        <p class="section-sub">Reach out for a free quote, site assessment, or to learn more about our monitoring
+          services.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">📞</div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value"><a href="tel:+14092695288">(409) 269-5288</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:info@ahdiantech.com">info@ahdiantech.com</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">🌐</div>
+            <div>
+              <div class="contact-label">Coverage</div>
+              <div class="contact-value">Nationwide — All 50 States</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">🕐</div>
+            <div>
+              <div class="contact-label">Hours</div>
+              <div class="contact-value">24/7 — Always Available</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">💬</div>
+            <div>
+              <div class="contact-label">WhatsApp</div>
+              <div class="contact-value"><a href="https://wa.me/923218109959" target="_blank" rel="noreferrer">Chat on
+                  WhatsApp →</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Note: Still uses EmailJS if you want it. Keys are in /js/main.js -->
+        <form class="contact-form" id="contactForm" novalidate="">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="John" autocomplete="given-name"
+                required="">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="userEmail">Email</label>
+              <input type="email" id="userEmail" name="userEmail" placeholder="john@company.com" autocomplete="email"
+                required="">
+            </div>
+            <div class="form-group">
+              <label for="userPhone">Phone</label>
+              <input type="tel" id="userPhone" name="userPhone" placeholder="(555) 000-0000" autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="userIndustry">Industry</label>
+            <select id="userIndustry" name="userIndustry">
+              <option value="">Select your industry…</option>
+              <option>Warehouse / Logistics</option>
+              <option>Construction</option>
+              <option>Healthcare</option>
+              <option>Retail</option>
+              <option>Office / Commercial</option>
+              <option>Residential / Apartments</option>
+              <option>Restaurant / Hospitality</option>
+              <option>Parking / Transport</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="userCameras">Number of Cameras</label>
+            <select id="userCameras" name="userCameras">
+              <option value="">Select range…</option>
+              <option>1–4 cameras</option>
+              <option>5–16 cameras</option>
+              <option>17–32 cameras</option>
+              <option>33+ cameras</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="userMessage">Message</label>
+            <textarea id="userMessage" name="userMessage"
+              placeholder="Tell us about your property and security needs…"></textarea>
+          </div>
+
+          <button class="form-submit" id="submitBtn" type="submit">Send Message &amp; Get Free Quote</button>
+          <div id="formMsg" class="form-msg" role="status" aria-live="polite" hidden=""></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#home">Ahdian<span> Tech</span></a>
+        <p>Professional 24/7 remote CCTV monitoring services. Protecting your assets so you can focus on growing your
+          business — nationwide coverage, real-time response.</p>
+        <div class="footer-social" aria-label="Social links">
+          <a class="social-icon" href="#" aria-label="LinkedIn">in</a>
+          <a class="social-icon" href="#" aria-label="Twitter">tw</a>
+          <a class="social-icon" href="#" aria-label="Facebook">fb</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">24/7 Live Monitoring</a></li>
+          <li><a href="#services">Real-Time Alerts</a></li>
+          <li><a href="#services">Incident Reports</a></li>
+          <li><a href="#services">Asset Monitoring</a></li>
+          <li><a href="#services">Mobile Trailers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="#industries">Warehouses</a></li>
+          <li><a href="#industries">Construction</a></li>
+          <li><a href="#industries">Healthcare</a></li>
+          <li><a href="#industries">Retail</a></li>
+          <li><a href="#industries">Apartments</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#why-outsource">Why Outsource?</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#it-services">IT Services</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 AhdianTech. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a></span>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop" class="back-to-top" type="button" title="Back to Top" aria-label="Back to top">↑</button>
+
+  <!-- EmailJS SDK (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Main JS -->
+  <script src="js/main.js" defer=""></script>
+</body>
+
+</html>

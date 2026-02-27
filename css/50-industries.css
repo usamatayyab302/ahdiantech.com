@@ -1,0 +1,8 @@
+/* FILE: css/50-industries.css */
+
+.industries-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.industry-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 28px 24px; text-align: center; transition: all 0.3s; cursor: default; }
+.industry-card:hover { border-color: rgba(0,200,255,0.5); background: var(--surface2); box-shadow: var(--glow); }
+.ind-icon { font-size: 2.5rem; margin-bottom: 14px; display: block; }
+.ind-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.ind-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
