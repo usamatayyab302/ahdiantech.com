@@ -1,0 +1,32 @@
+/* FILE: css/30-why-outsource.css */
+
+.section--surface::before {
+  content: '';
+  position: absolute;
+  right: -100px;
+  top: -100px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.outsource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.outsource-list { display: flex; flex-direction: column; gap: 28px; }
+.outsource-item { display: flex; gap: 20px; }
+.o-icon { width: 48px; height: 48px; border-radius: 8px; flex-shrink: 0; background: rgba(0,200,255,0.1); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+.o-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.o-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+.cost-comparison { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 36px; }
+.cost-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+.cost-bar-item { margin-bottom: 20px; }
+.cost-bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.85rem; }
+.price { font-weight: 700; color: var(--accent); }
+.price--red { color: #ff6b6b; }
+.cost-bar-track { height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden; }
+.cost-bar-fill { height: 100%; border-radius: 5px; }
+.bar-guard { width: 85%; background: linear-gradient(90deg, var(--accent2), #ff6b6b); }
+.bar-us { width: 25%; background: linear-gradient(90deg, var(--accent), #00eeff); }
+.savings-badge { margin-top: 28px; padding: 18px; background: rgba(0,200,255,0.08); border: 1px solid rgba(0,200,255,0.2); border-radius: 8px; text-align: center; }
+.savings-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--accent); letter-spacing: 2px; }
+.savings-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }

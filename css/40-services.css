@@ -1,0 +1,13 @@
+/* FILE: css/40-services.css */
+
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.service-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 32px; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+.service-card::before { content:''; position: absolute; left: 0; top: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.service-card:hover { border-color: rgba(0,200,255,0.4); transform: translateY(-4px); box-shadow: var(--glow); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon { font-size: 2.2rem; margin-bottom: 18px; }
+.service-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+.service-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+.service-list { margin-top: 14px; list-style: none; }
+.service-list li { font-size: 0.82rem; color: var(--muted); padding: 4px 0 4px 16px; position: relative; }
+.service-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; }
